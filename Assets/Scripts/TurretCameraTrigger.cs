@@ -6,9 +6,9 @@ public class TurretCameraTrigger : MonoBehaviour
 {
     public Camera triggeredCam;
     public Camera liveCam;
-    public bool inTurret = false;
+    private bool inTurret = false;
 
-    void awake()
+    void Awake()
     {
         liveCam = Camera.allCameras[0];
     }
@@ -18,28 +18,26 @@ public class TurretCameraTrigger : MonoBehaviour
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         Collider PlayerCollider = Player.GetComponent<Collider>();
 
-        if (other == PlayerCollider && Input.GetKeyDown(KeyCode.G) && inTurret == false)
+        //if (other == PlayerCollider && Input.GetKeyDown(KeyCode.G) && inTurret == false)
+        if (other == PlayerCollider && Input.GetKeyDown(KeyCode.G) && triggeredCam.enabled == false)
         {
-            inTurret = true;
+            //inTurret = true;
+
             triggeredCam.enabled = true;
             liveCam.enabled = false;
 
-            liveCam = Camera.allCameras[0];
-
-            triggeredCam.GetComponent<AudioListener>().enabled = true;
-            Player.GetComponent<AudioListener>().enabled = false;
+            print("in box collider g pressed 1");
         }
 
-        else if (other == PlayerCollider && Input.GetKeyDown(KeyCode.G) && inTurret == true)
+        //if (/*other == PlayerCollider &&*/ Input.GetKeyDown(KeyCode.G) && inTurret == true)
+        else if(Input.GetKeyDown(KeyCode.G) && triggeredCam.enabled == true)
         {
-            inTurret = false;
-            triggeredCam.enabled = false;
             liveCam.enabled = true;
+            triggeredCam.enabled = false;
 
-            triggeredCam = Camera.allCameras[0];
+            print("in box collider g pressed 2");
 
-            liveCam.GetComponent<AudioListener>().enabled = true;
-            Player.GetComponent<AudioListener>().enabled = false;
+            //inTurret = false;
         }
     }
 }

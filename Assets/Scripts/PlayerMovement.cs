@@ -21,16 +21,8 @@ public class PlayerMovement : MonoBehaviour
     {
         float v = Input.GetAxis("Vertical");
 
-        //bool w = Input.GetKeyDown(KeyCode.W);
-        //bool shift = Input.GetKeyDown(KeyCode.LeftShift);
-        //bool space = Input.GetKeyDown(KeyCode.Space);
-
-        //bool a = Input.GetKeyDown(KeyCode.A);
-        //bool d = Input.GetKeyDown(KeyCode.D);
-
         float mouseX = Input.GetAxis("Mouse X");
 
-        //Rotating(mouseX);
         MovementManager(v);
     }
 
@@ -76,7 +68,16 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetFloat(hash.speedFloat, 0);
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            
+        }
+
     }
 
    /* void Rotating(float mouseXInput)
