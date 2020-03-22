@@ -6,7 +6,7 @@ public class TurretCameraTrigger : MonoBehaviour
 {
     public Camera triggeredCam;
     public Camera liveCam;
-    private bool inTurret = false;
+    //private bool inTurret = false;
 
     void Awake()
     {

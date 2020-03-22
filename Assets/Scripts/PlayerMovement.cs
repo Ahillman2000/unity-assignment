@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private HashIDs hash;
 
+    private float elapsedTime = 0;
+    private bool noBackMov = true;
+
     private void Awake()
     {
         anim = GetComponent <Animator> ();
@@ -24,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
 
         MovementManager(v);
+
+        elapsedTime += Time.deltaTime;
     }
 
     void MovementManager (float vertical)
@@ -62,20 +67,29 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
         {
             anim.SetFloat(hash.speedFloat, 21f, speedDampTime, Time.deltaTime);
+            noBackMov = true;
         }
 
         else if (vertical < 0.2)
         {
             anim.SetFloat(hash.speedFloat, 0);
+            noBackMov = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
+        Rigidbody ourBody = this.GetComponent<Rigidbody>();
 
-        }
-        if (Input.GetKeyUp(KeyCode.S))
+
+        if (Input.GetKey(KeyCode.S))
         {
-            
+            if (noBackMov == true)
+            {
+                elapsedTime = 0;
+                noBackMov = false;
+            }
+
+            Vector3 moveBack = new Vector3(0.0f, 0.0f, -0.03f);
+            moveBack = ourBody.transform.TransformDirection(moveBack);
+            ourBody.transform.position += moveBack;
         }
 
     }
