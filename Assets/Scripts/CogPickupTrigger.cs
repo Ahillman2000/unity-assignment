@@ -20,10 +20,12 @@ public class CogPickupTrigger : MonoBehaviour
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Collider playerCollider = player.GetComponent<Collider>();
+
         GameObject gear = GameObject.FindGameObjectWithTag("Gear");
         Collider gearCollider = gear.GetComponent<Collider>();
 
-        print("gear collision");
+        //print("gear collision");
+        print(picked_up);
 
         if (Input.GetKeyDown(KeyCode.P) && other == playerCollider && picked_up == false)
         {
@@ -32,20 +34,21 @@ public class CogPickupTrigger : MonoBehaviour
             picked_up = true;
         }
 
-        else if (Input.GetKeyDown(KeyCode.P) && other == playerCollider && picked_up == true)
+        else if (Input.GetKeyDown(KeyCode.P) && picked_up == true)
         {
-            print("gear dropped");
-            gear.transform.parent = null;
             picked_up = false;
+            print("gear dropped");
+            //gear.transform.parent = gear.transform;
+            gear.transform.parent = null;
         }
 
     }
 
-    private void OnCollisionExit(Collision collision)
+    /*private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject == player)
         {
             gear.transform.parent = null;
         }
-    }
+    }*/
 }
