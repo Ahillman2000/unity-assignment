@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         float v = Input.GetAxis("Vertical");

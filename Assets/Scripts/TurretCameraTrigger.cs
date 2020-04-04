@@ -14,6 +14,7 @@ public class TurretCameraTrigger : MonoBehaviour
     private bool in_turret = false;
 
     private float turret_speed = 100;
+    private float turret_y;
 
     void Awake()
     {
@@ -26,19 +27,18 @@ public class TurretCameraTrigger : MonoBehaviour
         Turret = GameObject.Find("group_turret");
         Collider PlayerCollider = Player.GetComponent<Collider>();
 
-        //if (other == PlayerCollider && Input.GetKeyDown(KeyCode.G) && inTurret == false)
         if (other == PlayerCollider && Input.GetKeyDown(KeyCode.G) && triggeredCam.enabled == false)
         {
+                        print("enter turret");
 
             triggeredCam.enabled = true;
             liveCam.enabled = false;
             can_move = false;
             in_turret = true;
 
-            print("enter turret");
+            Player.transform.parent = Turret.transform;
         }
 
-        //if (/*other == PlayerCollider &&*/ Input.GetKeyDown(KeyCode.G) && inTurret == true)
         else if(Input.GetKeyDown(KeyCode.G) && triggeredCam.enabled == true)
         {
             liveCam.enabled = true;
@@ -46,12 +46,14 @@ public class TurretCameraTrigger : MonoBehaviour
             can_move = true;
             in_turret = false;
 
+            Turret.transform.rotation = Quaternion.Euler(0, turret_y, 0);
+
             Player.transform.parent = null;
 
             print("exit turret");
 
-            Turret.transform.Rotate(0, -90, 0);
-            
+            //Turret.transform.Rotate(0, -90, 0);
+
         }
     }
 
@@ -59,7 +61,11 @@ public class TurretCameraTrigger : MonoBehaviour
     {
         if (in_turret)
         {
+
             Player.transform.parent = Turret.transform;
+
+            turret_y = Turret.transform.rotation.eulerAngles.y;
+            //print(turret_y);
 
             if (Input.GetKey(KeyCode.A))
             {
