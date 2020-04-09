@@ -44,7 +44,7 @@ public class gearRight1Pickup : MonoBehaviour
         }
         else
         {
-            this.transform.parent = null;
+            this.transform.parent = this.transform;
         }
     }
 }

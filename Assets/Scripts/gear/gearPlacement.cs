@@ -11,8 +11,10 @@ public class gearPlacement : MonoBehaviour
 
     GameObject gondola;
     GameObject gear;
+    GameObject scene;
 
     public bool gear_placed = false;
+    private bool run_animation_1 = false;
 
     void Awake()
     {
@@ -20,6 +22,7 @@ public class gearPlacement : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<Collider>();
 
+        scene = GameObject.Find("Maya files");
         gear = GameObject.Find("gearRight1");
         gondola = GameObject.Find("groupGondola");
 
@@ -44,15 +47,15 @@ public class gearPlacement : MonoBehaviour
             Quaternion gear_rotation = new Quaternion(0, 0, 0, 1);
 
             //print("gear placed");
+
             gear.transform.SetPositionAndRotation(gear_position, gear_rotation);
-            gear.transform.parent = gondola.transform;
+            gear_placed = false;
+            run_animation_1 = true;
         }
 
-        //print("gear_placed: " + gear_placed);
-
-        if (gear.transform.parent == gondola.transform)
+        if (run_animation_1)
         {
-            //print("gear parented to gondola");
+            gear.transform.parent = gondola.transform;
         }
     }
 }
