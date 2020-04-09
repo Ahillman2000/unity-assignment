@@ -65,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("RightTurn", false);
             }
 
-
             if (Input.GetKey(KeyCode.W))
             {
                 anim.SetFloat(hash.speedFloat, 1.5f, speedDampTime, Time.deltaTime);
@@ -96,6 +95,11 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 moveBack = new Vector3(0.0f, 0.0f, -0.03f);
                 moveBack = ourBody.transform.TransformDirection(moveBack);
                 ourBody.transform.position += moveBack;
+            }
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                print("jump");
             }
         }
         else

@@ -9,6 +9,7 @@ public class TurretCameraTrigger : MonoBehaviour
 
     private GameObject Player;
     public GameObject Turret;
+    public GameObject Barrel;
 
     public bool can_move = true;
     private bool in_turret = false;
@@ -25,11 +26,12 @@ public class TurretCameraTrigger : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         Turret = GameObject.Find("group_turret");
+        Barrel= GameObject.Find("group_turret_barrel");
         Collider PlayerCollider = Player.GetComponent<Collider>();
 
         if (other == PlayerCollider && Input.GetKeyDown(KeyCode.G) && triggeredCam.enabled == false)
         {
-                        print("enter turret");
+            print("enter turret");
 
             triggeredCam.enabled = true;
             liveCam.enabled = false;
@@ -59,6 +61,7 @@ public class TurretCameraTrigger : MonoBehaviour
 
     private void Update()
     {
+
         if (in_turret)
         {
 
@@ -66,6 +69,7 @@ public class TurretCameraTrigger : MonoBehaviour
 
             turret_y = Turret.transform.rotation.eulerAngles.y;
             //print(turret_y);
+            //print(Barrel.transform.rotation.eulerAngles.x);
 
             if (Input.GetKey(KeyCode.A))
             {
@@ -77,15 +81,27 @@ public class TurretCameraTrigger : MonoBehaviour
                 Turret.transform.Rotate(0, turret_speed * Time.deltaTime, 0);
                 //print("rotate turret right");
             }
-            else if (Input.GetKey(KeyCode.W))
+
+            // Barrel.transform.rotation.eulerAngles.x
+            // Mathf.Clamp(Barrel.transform.rotation.eulerAngles.x, -20, 10)
+            float barrel_x = Barrel.transform.rotation.eulerAngles.x;
+            float upper_barrel_x = 340;
+            float lower_barrel_x = 10;
+
+            if (barrel_x > upper_barrel_x || barrel_x < lower_barrel_x)
             {
-                Turret.transform.Rotate(-turret_speed * Time.deltaTime, 0, 0);
-                //print("rotate turret up");
+                //print("within clamp");
+            }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                Barrel.transform.Rotate(-turret_speed * Time.deltaTime, 0, 0);
+                //print("rotate barrel up");
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                Turret.transform.Rotate(turret_speed * Time.deltaTime, 0, 0);
-                //print("rotate turret down");
+                Barrel.transform.Rotate(turret_speed * Time.deltaTime, 0, 0);
+                //print("rotate barrel down");
             }
         }
     }

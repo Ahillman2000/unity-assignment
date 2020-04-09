@@ -15,6 +15,9 @@ ModelImporter:
   - first:
       74: -8545625311352731767
     second: Gondola 1.5
+  - first:
+      74: -8578859493833275817
+    second: Gondola 2
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -102,9 +105,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: Gondola2
+      name: Gondola 2
       takeName: Take 001
-      internalID: 7841256560439549850
+      internalID: -8578859493833275817
       firstFrame: 240
       lastFrame: 480
       wrapMode: 0
@@ -114,35 +117,6 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
-    - serializedVersion: 16
-      name: Gondola 1.5
-      takeName: Take 001
-      internalID: -8545625311352731767
-      firstFrame: 240
-      lastFrame: 240
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

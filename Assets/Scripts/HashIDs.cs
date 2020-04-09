@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HashIDs : MonoBehaviour
 {
+    public int BackwardsBool;
     public int walkState;
     public int runState;
 
@@ -15,6 +16,7 @@ public class HashIDs : MonoBehaviour
 
     private void Awake()
     {
+        BackwardsBool = Animator.StringToHash("Backwards");
         walkState = Animator.StringToHash("Walk");
         runState = Animator.StringToHash("Run");
 
