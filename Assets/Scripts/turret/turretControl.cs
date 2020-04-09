@@ -2,69 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretCameraTrigger : MonoBehaviour
+public class turretControl : MonoBehaviour
 {
-    public Camera triggeredCam;
-    public Camera liveCam;
-
     private GameObject Player;
+    Collider PlayerCollider;
     public GameObject Turret;
     public GameObject Barrel;
 
     public bool can_move = true;
-    private bool in_turret = false;
 
     private float turret_speed = 100;
-    private float turret_y;
+    private float turret_y = -90;
+
+    TurretCameraTrigger turretCameraTrigger;
 
     void Awake()
     {
-        liveCam = Camera.allCameras[0];
-    }
-
-    void OnTriggerStay(Collider other)
-    {
         Player = GameObject.FindGameObjectWithTag("Player");
         Turret = GameObject.Find("group_turret");
-        Barrel= GameObject.Find("group_turret_barrel");
-        Collider PlayerCollider = Player.GetComponent<Collider>();
-
-        if (other == PlayerCollider && Input.GetKeyDown(KeyCode.G) && triggeredCam.enabled == false)
-        {
-            print("enter turret");
-
-            triggeredCam.enabled = true;
-            liveCam.enabled = false;
-            can_move = false;
-            in_turret = true;
-
-            Player.transform.parent = Turret.transform;
-        }
-
-        else if(Input.GetKeyDown(KeyCode.G) && triggeredCam.enabled == true)
-        {
-            liveCam.enabled = true;
-            triggeredCam.enabled = false;
-            can_move = true;
-            in_turret = false;
-
-            Turret.transform.rotation = Quaternion.Euler(0, turret_y, 0);
-
-            Player.transform.parent = null;
-
-            print("exit turret");
-
-            //Turret.transform.Rotate(0, -90, 0);
-
-        }
+        Barrel = GameObject.Find("group_turret_barrel");
+        PlayerCollider = Player.GetComponent<Collider>();
+        turretCameraTrigger = GameObject.Find("TurretCameraTrigger").GetComponent<TurretCameraTrigger>();
     }
 
     private void Update()
     {
-
-        if (in_turret)
+        if (turretCameraTrigger.in_turret)
         {
-
             Player.transform.parent = Turret.transform;
 
             turret_y = Turret.transform.rotation.eulerAngles.y;
@@ -103,6 +67,11 @@ public class TurretCameraTrigger : MonoBehaviour
                 Barrel.transform.Rotate(turret_speed * Time.deltaTime, 0, 0);
                 //print("rotate barrel down");
             }
+        }
+        else
+        {
+            Turret.transform.rotation = Quaternion.Euler(0, turret_y, 0);
+            Player.transform.parent = null;
         }
     }
 }
