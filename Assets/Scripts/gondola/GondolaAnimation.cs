@@ -8,6 +8,8 @@ public class GondolaAnimation : MonoBehaviour
     GameObject player;
     Collider playerCollider;
 
+    gearPlacement gearPlacement;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -15,11 +17,13 @@ public class GondolaAnimation : MonoBehaviour
 
         anim = GetComponent<Animator>();
         //anim.SetLayerWeight(1, 1f);
+
+        gearPlacement = GameObject.Find("CogPlacementCollision").GetComponent<gearPlacement>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other == playerCollider)
+        if (other == playerCollider && gearPlacement.run_animation_1)
         {
             print("run animation 1");
             anim.SetBool("Animation1", true);
@@ -35,5 +39,3 @@ public class GondolaAnimation : MonoBehaviour
         }
     }
 }
-
-// merging colliders stops onTriggerStay from running, jump is printed but not run animation 2

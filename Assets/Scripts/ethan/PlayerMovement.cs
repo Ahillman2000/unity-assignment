@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    TurretCameraTrigger can_move;
-
-    public float speedDampTime = 0.01f;
-    public float sensitivityX = 1.0f;
+    TurretCameraTrigger turretCameraTrigger;
+    EthanGondolaParenting ethanGondolaParenting;
+    EthanParenting ethanParenting;
+    
+    GameObject player;
+    GameObject turret;
+    GameObject elevator;
+    GameObject gondola;
 
     private Animator anim;
     private HashIDs hash;
+
+    public float speedDampTime = 0.01f;
+    public float sensitivityX = 1.0f;
 
     private float elapsedTime = 0;
     private bool noBackMov = true;
 
     private void Awake()
     {
-        can_move = GameObject.Find("TurretCameraTrigger").GetComponent<TurretCameraTrigger>();
-        
+        player = GameObject.FindGameObjectWithTag("Player");
+        turret = GameObject.Find("group_turret");
+        elevator = GameObject.Find("elevator");
+        gondola= GameObject.Find("gondola");
+
+
+        turretCameraTrigger = GameObject.Find("TurretCameraTrigger").GetComponent<TurretCameraTrigger>();
+        ethanGondolaParenting = GameObject.Find("gondola").GetComponent<EthanGondolaParenting>();
+        ethanParenting = GameObject.Find("elevator").GetComponent<EthanParenting>();
+
         anim = GetComponent <Animator> ();
         anim.SetLayerWeight(1, 1f);
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
@@ -34,11 +49,30 @@ public class PlayerMovement : MonoBehaviour
         MovementManager(v);
 
         elapsedTime += Time.deltaTime;
+
+        //print(player.transform.parent);
+
+        if (turretCameraTrigger.in_turret == true)
+        {
+            player.transform.parent = turret.transform;
+        }
+        else if (ethanGondolaParenting.in_gondola == true)
+        {
+            player.transform.parent = gondola.transform;
+        }
+        else if (ethanParenting.on_elevator == true)
+        {
+            player.transform.parent = elevator.transform;
+        }
+        else
+        {
+            player.transform.parent = null;
+        }
     }
 
     void MovementManager (float vertical)
     {
-        if (can_move.can_move)
+        if (turretCameraTrigger.can_move)
         {
             //print(can_move.can_move);
 

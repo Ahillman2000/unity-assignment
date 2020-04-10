@@ -586,6 +586,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: fe91c54e22e3f6a47bde7406101cd3cf, type: 2}
+    - target: {fileID: 9500000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 13700004, guid: b235179bd2a63d1468dd430670338c55, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -6306,6 +6310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376487d1e33c4c4489110a19d75d0c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  on_elevator: 0
 --- !u!1 &1792667207
 GameObject:
   m_ObjectHideFlags: 0
@@ -11313,6 +11318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gear_placed: 0
+  run_animation_1: 0
 --- !u!65 &2143953153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12536,6 +12542,9 @@ MonoBehaviour:
   Turret: {fileID: 0}
   Barrel: {fileID: 0}
   can_move: 1
+  x_pos: 0
+  min: 0
+  max: 0
 --- !u!23 &4120599410592985634
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12686,10 +12695,10 @@ BoxCollider:
   m_GameObject: {fileID: 4317663009755634524}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.0000029, y: 1.0509186, z: 10.800003}
-  m_Center: {x: 0.00000047683716, y: 0.02545929, z: 0}
+  m_Size: {x: 2, y: 1, z: 10.800003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4317663009755634527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12699,9 +12708,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4317663009755634524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 376487d1e33c4c4489110a19d75d0c58, type: 3}
+  m_Script: {fileID: 11500000, guid: 3709d03c857235e4ba83634b7be673c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  in_gondola: 0
 --- !u!33 &4365716865853867159
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -12969,7 +12979,7 @@ Transform:
   - {fileID: 8033416464331587150}
   - {fileID: 3089291781411871337}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5092135474068050696
 GameObject:
@@ -13403,7 +13413,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &6878910725981013263
 Light:

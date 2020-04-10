@@ -6,14 +6,21 @@ public class gearRight1Pickup : MonoBehaviour
 {
     public bool picked_up = false;
 
-    // GEAR OBJECT
+    GameObject gear;
     GameObject player;
     Collider playerCollider;
+
+    gearPlacement gearPlacement;
+
+    float gear_y;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<Collider>();
+        gear = GameObject.Find("gearRight1");
+
+        gearPlacement = GameObject.Find("CogPlacementCollision").GetComponent<gearPlacement>();
     }
 
     void OnTriggerStay(Collider other)
@@ -37,14 +44,16 @@ public class gearRight1Pickup : MonoBehaviour
     void Update()
     {
         //print("picked_up: " + picked_up);
-      
+        gear_y = gear.transform.rotation.eulerAngles.y;
+        //print(gear.transform.parent);
+
         if (picked_up)
         {
-            this.transform.parent = player.transform;
+            gear.transform.parent = player.transform;
         }
-        else
+        else if (picked_up == false && gearPlacement.run_animation_1 == false)
         {
-            this.transform.parent = this.transform;
+            gear.transform.parent = null;
         }
     }
 }

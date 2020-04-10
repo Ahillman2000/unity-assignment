@@ -14,7 +14,7 @@ public class gearPlacement : MonoBehaviour
     GameObject scene;
 
     public bool gear_placed = false;
-    private bool run_animation_1 = false;
+    public bool run_animation_1 = false;
 
     void Awake()
     {
@@ -36,11 +36,12 @@ public class gearPlacement : MonoBehaviour
             //print("within placement area, gear picked up and pressed p to place");
             gear_placed = true;
         }
-
     }
 
     private void Update()
     {
+        //print(gear.transform.parent);
+
         if (gear_placed)
         {
             Vector3 gear_position = new Vector3(-5.184f, 17.804f, 4.872f);
@@ -55,6 +56,7 @@ public class gearPlacement : MonoBehaviour
 
         if (run_animation_1)
         {
+            //print("gear parented");
             gear.transform.parent = gondola.transform;
         }
     }

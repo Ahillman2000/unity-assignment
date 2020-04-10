@@ -16,6 +16,10 @@ public class turretControl : MonoBehaviour
 
     TurretCameraTrigger turretCameraTrigger;
 
+    public float x_pos = 0;
+    public float min = -19;
+    public float max = 10;
+
     void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -29,7 +33,7 @@ public class turretControl : MonoBehaviour
     {
         if (turretCameraTrigger.in_turret)
         {
-            Player.transform.parent = Turret.transform;
+            //x_pos = Mathf.Clamp(x_pos, min, max);
 
             turret_y = Turret.transform.rotation.eulerAngles.y;
             //print(turret_y);
@@ -61,17 +65,20 @@ public class turretControl : MonoBehaviour
             {
                 Barrel.transform.Rotate(-turret_speed * Time.deltaTime, 0, 0);
                 //print("rotate barrel up");
+
+                //x_pos += Input.GetKey(KeyCode.W) ? -1 : 0;
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 Barrel.transform.Rotate(turret_speed * Time.deltaTime, 0, 0);
                 //print("rotate barrel down");
+
+                //x_pos += Input.GetKey(KeyCode.W) ? 1 : 0;
             }
         }
         else
         {
             Turret.transform.rotation = Quaternion.Euler(0, turret_y, 0);
-            Player.transform.parent = null;
         }
     }
 }

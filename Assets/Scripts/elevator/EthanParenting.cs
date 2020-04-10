@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ethanGondolaParenting : MonoBehaviour
+public class EthanParenting : MonoBehaviour
 {
     private GameObject player;
+    public bool on_elevator = false;
 
-    void Awake()
+    private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (Input.GetKeyDown(KeyCode.E) && collision.gameObject == player)
+        if (collision.gameObject == player)
         {
-            player.transform.parent = this.transform;
+            on_elevator = true;
         }
     }
 
@@ -23,7 +24,7 @@ public class ethanGondolaParenting : MonoBehaviour
     {
         if (collision.gameObject == player)
         {
-            player.transform.parent = null;
+            on_elevator = false;
         }
     }
 }
