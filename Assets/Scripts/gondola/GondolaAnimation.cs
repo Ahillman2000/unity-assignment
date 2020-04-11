@@ -25,7 +25,7 @@ public class GondolaAnimation : MonoBehaviour
     {
         if (other == playerCollider && gearPlacement.run_animation_1)
         {
-            print("run animation 1");
+            //print("run animation 1");
             anim.SetBool("Animation1", true);
         }
     }
@@ -34,7 +34,7 @@ public class GondolaAnimation : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            print("run animation 2");
+            //print("run animation 2");
             anim.SetBool("Animation2", true);
         }
     }

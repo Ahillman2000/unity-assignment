@@ -44,8 +44,6 @@ public class PlayerMovement : MonoBehaviour
 
         float v = Input.GetAxis("Vertical");
 
-        float mouseX = Input.GetAxis("Mouse X");
-
         MovementManager(v);
 
         elapsedTime += Time.deltaTime;
@@ -78,7 +76,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                //anim.SetBool(hash.LeftTurn, true);
                 anim.SetBool("LeftTurn", true);
                 //print("going left");
 

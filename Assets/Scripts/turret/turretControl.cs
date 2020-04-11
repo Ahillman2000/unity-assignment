@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class turretControl : MonoBehaviour
 {
+    TurretCameraTrigger turretCameraTrigger;
+
     private GameObject Player;
-    Collider PlayerCollider;
     public GameObject Turret;
     public GameObject Barrel;
 
@@ -14,30 +15,29 @@ public class turretControl : MonoBehaviour
     private float turret_speed = 100;
     private float turret_y = -90;
 
-    TurretCameraTrigger turretCameraTrigger;
-
-    public float x_pos = 0;
-    public float min = -19;
-    public float max = 10;
+    private float current_barrel_x;
+    private float min_barrel_x_clamp;
+    private float max_barrel_x_clamp;
 
     void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         Turret = GameObject.Find("group_turret");
         Barrel = GameObject.Find("group_turret_barrel");
-        PlayerCollider = Player.GetComponent<Collider>();
         turretCameraTrigger = GameObject.Find("TurretCameraTrigger").GetComponent<TurretCameraTrigger>();
+
+        min_barrel_x_clamp = -0.06162845f;
+        max_barrel_x_clamp = 0.06162845f;
     }
 
     private void Update()
     {
         if (turretCameraTrigger.in_turret)
         {
-            //x_pos = Mathf.Clamp(x_pos, min, max);
-
             turret_y = Turret.transform.rotation.eulerAngles.y;
             //print(turret_y);
-            //print(Barrel.transform.rotation.eulerAngles.x);
+            current_barrel_x = Mathf.Clamp(Barrel.transform.rotation.x, min_barrel_x_clamp, max_barrel_x_clamp);
+            print(current_barrel_x);
 
             if (Input.GetKey(KeyCode.A))
             {
@@ -49,31 +49,20 @@ public class turretControl : MonoBehaviour
                 Turret.transform.Rotate(0, turret_speed * Time.deltaTime, 0);
                 //print("rotate turret right");
             }
-
-            // Barrel.transform.rotation.eulerAngles.x
-            // Mathf.Clamp(Barrel.transform.rotation.eulerAngles.x, -20, 10)
-            float barrel_x = Barrel.transform.rotation.eulerAngles.x;
-            float upper_barrel_x = 340;
-            float lower_barrel_x = 10;
-
-            if (barrel_x > upper_barrel_x || barrel_x < lower_barrel_x)
-            {
-                //print("within clamp");
-            }
-
+           
             if (Input.GetKey(KeyCode.W))
             {
-                Barrel.transform.Rotate(-turret_speed * Time.deltaTime, 0, 0);
-                //print("rotate barrel up");
-
-                //x_pos += Input.GetKey(KeyCode.W) ? -1 : 0;
+                if (current_barrel_x < max_barrel_x_clamp)
+                {
+                    Barrel.transform.Rotate(-turret_speed * Time.deltaTime, 0, 0);
+                }
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                Barrel.transform.Rotate(turret_speed * Time.deltaTime, 0, 0);
-                //print("rotate barrel down");
-
-                //x_pos += Input.GetKey(KeyCode.W) ? 1 : 0;
+                if (current_barrel_x > min_barrel_x_clamp)
+                {
+                    Barrel.transform.Rotate(turret_speed * Time.deltaTime, 0, 0);
+                }
             }
         }
         else
