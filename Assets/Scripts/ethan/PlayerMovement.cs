@@ -130,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Space))
             {
-                print("jump");
+                //print("jump");
             }
         }
         else

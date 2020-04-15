@@ -5,13 +5,19 @@ using UnityEngine;
 public class GondolaAnimation : MonoBehaviour
 {
     Animator anim;
+
+    GameObject gondola;
     GameObject player;
     Collider playerCollider;
 
     gearPlacement gearPlacement;
 
+    public bool run_animation_2 = false;
+    bool scene_idle_2 = false;
+
     private void Awake()
     {
+        gondola = GameObject.Find("groupGondola");
         player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<Collider>();
 
@@ -32,8 +38,17 @@ public class GondolaAnimation : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        //print(gondola.transform.position.x);
+
+        if (gondola.transform.position.x >= 14.3 && gondola.transform.position.x <= 14.5)
         {
+            //print("gondola idle at 14.433");
+            scene_idle_2 = true;
+        }
+
+        if (Input.GetKey(KeyCode.Space) && scene_idle_2)
+        {
+            run_animation_2 = true; 
             //print("run animation 2");
             anim.SetBool("Animation2", true);
         }

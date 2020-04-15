@@ -17,6 +17,9 @@ ModelImporter:
     second: Gondola 1.5
   - first:
       74: -8578859493833275817
+    second: Gondola 1.5
+  - first:
+      74: -795648466559956566
     second: Gondola 2
   externalObjects: {}
   materials:
@@ -107,7 +110,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Gondola 2
       takeName: Take 001
-      internalID: -8578859493833275817
+      internalID: -795648466559956566
       firstFrame: 240
       lastFrame: 480
       wrapMode: 0
