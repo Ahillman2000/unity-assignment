@@ -34,12 +34,12 @@ public class GroupShipScript : MonoBehaviour
         }
 
         // Debug controls for ship
-        if (Input.GetKeyDown(KeyCode.Q))
+        /*if (Input.GetKeyDown(KeyCode.Q))
         {
             //print("ship activated");
             ship.gameObject.SetActive(true);
             shipLanding = true;
-        }
+        }*/
 
         if (shipLanding)
         {

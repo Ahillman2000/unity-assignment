@@ -48,24 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
         elapsedTime += Time.deltaTime;
 
-        //print(player.transform.parent);
-
-        if (turretCameraTrigger.in_turret == true)
-        {
-            player.transform.parent = turret.transform;
-        }
-        else if (ethanGondolaParenting.in_gondola == true)
-        {
-            player.transform.parent = gondola.transform;
-        }
-        else if (ethanParenting.on_elevator == true)
-        {
-            player.transform.parent = elevator.transform;
-        }
-        else
-        {
-            player.transform.parent = null;
-        }
+        ParentChecks();
     }
 
     void MovementManager (float vertical)
@@ -78,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 anim.SetBool("LeftTurn", true);
                 //print("going left");
-
             }
             if (Input.GetKeyUp(KeyCode.A))
             {
@@ -87,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.D))
             {
-                //anim.SetFloat(hash.RightTurn, 1);
                 anim.SetBool("RightTurn", true);
                 //print("going right");
             }
@@ -139,14 +120,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }      
 
-   /* void Rotating(float mouseXInput)
+   void ParentChecks()
     {
-        Rigidbody ourBody = this.GetComponent<Rigidbody>();
+        //print(player.transform.parent);
 
-        if (mouseXInput != 0)
+        if (turretCameraTrigger.in_turret == true)
         {
-            Quaternion deltaRotation = Quaternion.Euler(0f, mouseXInput * sensitivityX, 0f);
-            ourBody.MoveRotation(ourBody.rotation * deltaRotation);
+            player.transform.parent = turret.transform;
         }
-    }*/
+        else if (ethanGondolaParenting.in_gondola == true)
+        {
+            player.transform.parent = gondola.transform;
+        }
+        else if (ethanParenting.on_elevator == true)
+        {
+            player.transform.parent = elevator.transform;
+        }
+        else
+        {
+            player.transform.parent = null;
+        }
+    }
 }
